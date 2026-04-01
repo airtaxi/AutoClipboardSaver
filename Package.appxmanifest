@@ -10,15 +10,15 @@
   IgnorableNamespaces="uap uap5 rescap systemai">
 
   <Identity
-    Name="e264105a-823d-409e-b80c-38f1833b72d1"
-    Publisher="CN=kck41"
+    Name="49536HowonLee.AutoClipboardSaver"
+    Publisher="CN=7713B07B-6F8A-4FB4-877B-2FA9AF531D39"
     Version="1.0.0.0" />
 
   <mp:PhoneIdentity PhoneProductId="e264105a-823d-409e-b80c-38f1833b72d1" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
   <Properties>
     <DisplayName>ms-resource:AppDisplayName</DisplayName>
-    <PublisherDisplayName>kck41</PublisherDisplayName>
+    <PublisherDisplayName>Howon Lee</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
 

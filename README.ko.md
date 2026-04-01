@@ -2,7 +2,10 @@
 
 한국어 | **[English](README.md)**
 
-WinUI 3로 구축된 경량 클립보드 이미지 자동 저장 앱<br><br>
+WinUI 3로 구축된 경량 클립보드 이미지 자동 저장 앱
+
+[![Get it from Microsoft](https://get.microsoft.com/images/en-us%20dark.svg)](https://apps.microsoft.com/detail/9P9M0JWCJQTX)
+
 <img alt="KO" src=".github/Assets/KO.jpg" />
 
 ## 개요

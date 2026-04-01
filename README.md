@@ -2,7 +2,10 @@
 
 **[한국어](README.ko.md)** | English
 
-A lightweight clipboard image auto-saver built with WinUI 3<br><br>
+A lightweight clipboard image auto-saver built with WinUI 3
+
+[![Get it from Microsoft](https://get.microsoft.com/images/en-us%20dark.svg)](https://apps.microsoft.com/detail/9P9M0JWCJQTX)
+
 <img alt="EN" src=".github/Assets/EN.jpg" />
 
 ## Overview
