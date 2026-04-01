@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+
+  <!-- App Manifest -->
+  <data name="AppDisplayName" xml:space="preserve">
+    <value>Auto Clipboard Saver</value>
+  </data>
+  <data name="AppDescription" xml:space="preserve">
+    <value>クリップボードの画像を自動的にフォルダに保存します</value>
+  </data>
+
+  <!-- MainPage -->
+  <data name="SaveDirectoryPathTextBox.Header" xml:space="preserve">
+    <value>保存先フォルダ</value>
+  </data>
+  <data name="SaveWithTimestampToggleSwitch.OnContent" xml:space="preserve">
+    <value>タイムスタンプ付きで保存</value>
+  </data>
+  <data name="SaveWithTimestampToggleSwitch.OffContent" xml:space="preserve">
+    <value>タイムスタンプなしで保存</value>
+  </data>
+  <data name="MaxImagesComboBox.Header" xml:space="preserve">
+    <value>最大画像数</value>
+  </data>
+  <data name="UnlimitedComboBoxItem.Content" xml:space="preserve">
+    <value>無制限</value>
+  </data>
+  <data name="LaunchOnStartupCheckBox.Content" xml:space="preserve">
+    <value>システム起動時に自動起動</value>
+  </data>
+
+  <!-- SettingsWindow -->
+  <data name="AppTitleBar.Title" xml:space="preserve">
+    <value>Auto Clipboard Saver</value>
+  </data>
+  <data name="AuthorMenuFlyoutItem.Text" xml:space="preserve">
+    <value>作者: Howon Lee (airtaxi)</value>
+  </data>
+  <data name="OpenSettingsMenuFlyoutItem.Text" xml:space="preserve">
+    <value>設定ウィンドウを開く</value>
+  </data>
+  <data name="CloseMenuFlyoutItem.Text" xml:space="preserve">
+    <value>閉じる</value>
+  </data>
+</root>

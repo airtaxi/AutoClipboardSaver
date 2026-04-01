@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Page
+    x:Class="AutoClipboardSaver.Pages.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="using:AutoClipboardSaver.Pages"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <StackPanel Padding="8" Spacing="4">
+        <Grid ColumnSpacing="4">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <TextBox
+                x:Name="SaveDirectoryPathTextBox"
+                x:Uid="SaveDirectoryPathTextBox"
+                Grid.Column="0"
+                VerticalAlignment="Top"
+                IsReadOnly="True"
+                IsTabStop="False" />
+            <Button
+                Grid.Column="1"
+                VerticalAlignment="Bottom"
+                Click="OnBrowseFolderButtonClicked">
+                <SymbolIcon Symbol="Folder" />
+            </Button>
+
+        </Grid>
+
+        <ToggleSwitch
+            x:Name="SaveWithTimestampToggleSwitch"
+            x:Uid="SaveWithTimestampToggleSwitch"
+            Margin="0,-4"
+            Toggled="OnSaveWithTimestampToggleSwitchToggled" />
+
+        <ComboBox
+            x:Name="MaxImagesComboBox"
+            x:Uid="MaxImagesComboBox"
+            SelectionChanged="OnMaxImagesComboBoxSelectionChanged">
+            <ComboBoxItem Tag="5">5</ComboBoxItem>
+            <ComboBoxItem Tag="10">10</ComboBoxItem>
+            <ComboBoxItem Tag="15">15</ComboBoxItem>
+            <ComboBoxItem Tag="20">20</ComboBoxItem>
+            <ComboBoxItem Tag="25">25</ComboBoxItem>
+            <ComboBoxItem Tag="30">30</ComboBoxItem>
+            <ComboBoxItem x:Uid="UnlimitedComboBoxItem" Tag="-1" />
+        </ComboBox>
+
+        <CheckBox
+            x:Name="LaunchOnStartupCheckBox"
+            x:Uid="LaunchOnStartupCheckBox"
+            Click="OnLaunchOnStartupCheckBoxClicked" />
+    </StackPanel>
+</Page>

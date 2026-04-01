@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "AutoClipboardSaver (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "AutoClipboardSaver (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}

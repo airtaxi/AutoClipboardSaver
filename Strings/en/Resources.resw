@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+
+  <!-- App Manifest -->
+  <data name="AppDisplayName" xml:space="preserve">
+    <value>Auto Clipboard Saver</value>
+  </data>
+  <data name="AppDescription" xml:space="preserve">
+    <value>Automatically saves clipboard images to a folder</value>
+  </data>
+
+  <!-- MainPage -->
+  <data name="SaveDirectoryPathTextBox.Header" xml:space="preserve">
+    <value>Save Directory Path</value>
+  </data>
+  <data name="SaveWithTimestampToggleSwitch.OnContent" xml:space="preserve">
+    <value>Save with timestamp</value>
+  </data>
+  <data name="SaveWithTimestampToggleSwitch.OffContent" xml:space="preserve">
+    <value>Save without timestamp</value>
+  </data>
+  <data name="MaxImagesComboBox.Header" xml:space="preserve">
+    <value>Max Images</value>
+  </data>
+  <data name="UnlimitedComboBoxItem.Content" xml:space="preserve">
+    <value>Unlimited</value>
+  </data>
+  <data name="LaunchOnStartupCheckBox.Content" xml:space="preserve">
+    <value>Launch on system startup</value>
+  </data>
+
+  <!-- SettingsWindow -->
+  <data name="AppTitleBar.Title" xml:space="preserve">
+    <value>Auto Clipboard Saver</value>
+  </data>
+  <data name="AuthorMenuFlyoutItem.Text" xml:space="preserve">
+    <value>Author: Howon Lee (airtaxi)</value>
+  </data>
+  <data name="OpenSettingsMenuFlyoutItem.Text" xml:space="preserve">
+    <value>Open Settings Window</value>
+  </data>
+  <data name="CloseMenuFlyoutItem.Text" xml:space="preserve">
+    <value>Close</value>
+  </data>
+</root>
