@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.IO;
 using System.Linq;
 using System.Threading;
@@ -14,10 +15,55 @@ public sealed partial class ClipboardMonitor : IDisposable
     public bool IsRecording { get; set; } = true;
 
     private int _isProcessing;
+    private readonly ConcurrentDictionary<string, DateTime> _expirationRegistry = new();
+    private Timer _expirationTimer;
 
-    public void Start() => Clipboard.ContentChanged += OnClipboardContentChanged;
+    public void Start()
+    {
+        Clipboard.ContentChanged += OnClipboardContentChanged;
+        InitializeExpirationTracking();
+    }
 
-    public void Dispose() => Clipboard.ContentChanged -= OnClipboardContentChanged;
+    public void Dispose()
+    {
+        Clipboard.ContentChanged -= OnClipboardContentChanged;
+        _expirationTimer?.Dispose();
+    }
+
+    private void InitializeExpirationTracking()
+    {
+        var saveDirectoryPath = Configuration.SaveDirectoryPath;
+        if (Directory.Exists(saveDirectoryPath))
+        {
+            foreach (var filePath in Directory.GetFiles(saveDirectoryPath, "clipboard_*.jpg"))
+                _expirationRegistry[filePath] = new FileInfo(filePath).CreationTime;
+        }
+
+        _expirationTimer = new Timer(OnExpirationTimerTick, null, TimeSpan.FromSeconds(1), TimeSpan.FromSeconds(1));
+    }
+
+    private void OnExpirationTimerTick(object state)
+    {
+        var expirationMinutes = Configuration.ExpirationMinutes;
+
+        foreach (var entry in _expirationRegistry)
+        {
+            if (!File.Exists(entry.Key))
+            {
+                _expirationRegistry.TryRemove(entry.Key, out _);
+                continue;
+            }
+
+            if (expirationMinutes <= 0) continue;
+
+            if (DateTime.Now - entry.Value >= TimeSpan.FromMinutes(expirationMinutes))
+            {
+                try { File.Delete(entry.Key); }
+                catch { }
+                _expirationRegistry.TryRemove(entry.Key, out _);
+            }
+        }
+    }
 
     private async void OnClipboardContentChanged(object sender, object args)
     {
@@ -27,16 +73,18 @@ public sealed partial class ClipboardMonitor : IDisposable
         try
         {
             await Task.Delay(100);
-            await SaveClipboardImageAsync();
+            var savedFilePath = await SaveClipboardImageAsync();
+            if (savedFilePath != null)
+                _expirationRegistry[savedFilePath] = DateTime.Now;
         }
         catch { } // Silently ignore errors (clipboard locked, unsupported format, etc.)
         finally { Interlocked.Exchange(ref _isProcessing, 0); }
     }
 
-    private static async Task SaveClipboardImageAsync()
+    private static async Task<string> SaveClipboardImageAsync()
     {
         var content = Clipboard.GetContent();
-        if (!content.Contains(StandardDataFormats.Bitmap)) return;
+        if (!content.Contains(StandardDataFormats.Bitmap)) return null;
 
         var bitmapReference = await content.GetBitmapAsync();
         using var bitmapStream = await bitmapReference.OpenReadAsync();
@@ -67,6 +115,8 @@ public sealed partial class ClipboardMonitor : IDisposable
         await File.WriteAllBytesAsync(filePath, imageBytes);
 
         if (Configuration.SaveWithTimestamp) EnforceMaximumImageCount(saveDirectoryPath);
+
+        return Configuration.SaveWithTimestamp ? filePath : null;
     }
 
     private static void EnforceMaximumImageCount(string directoryPath)

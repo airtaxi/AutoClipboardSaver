@@ -49,6 +49,22 @@
             <ComboBoxItem x:Uid="UnlimitedComboBoxItem" Tag="-1" />
         </ComboBox>
 
+        <ComboBox
+            x:Name="ExpirationComboBox"
+            x:Uid="ExpirationComboBox"
+            SelectionChanged="OnExpirationComboBoxSelectionChanged">
+            <ComboBoxItem Tag="1">1m</ComboBoxItem>
+            <ComboBoxItem Tag="5">5m</ComboBoxItem>
+            <ComboBoxItem Tag="10">10m</ComboBoxItem>
+            <ComboBoxItem Tag="30">30m</ComboBoxItem>
+            <ComboBoxItem Tag="60">1h</ComboBoxItem>
+            <ComboBoxItem Tag="180">3h</ComboBoxItem>
+            <ComboBoxItem Tag="360">6h</ComboBoxItem>
+            <ComboBoxItem Tag="720">12h</ComboBoxItem>
+            <ComboBoxItem Tag="1440">24h</ComboBoxItem>
+            <ComboBoxItem x:Uid="ExpirationDisabledComboBoxItem" Tag="-1" />
+        </ComboBox>
+
         <CheckBox
             x:Name="LaunchOnStartupCheckBox"
             x:Uid="LaunchOnStartupCheckBox"

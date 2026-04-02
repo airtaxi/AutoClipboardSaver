@@ -40,6 +40,12 @@
   <data name="LaunchOnStartupCheckBox.Content" xml:space="preserve">
     <value>시스템 시작 시 자동 실행</value>
   </data>
+  <data name="ExpirationComboBox.Header" xml:space="preserve">
+    <value>자동 삭제 시간</value>
+  </data>
+  <data name="ExpirationDisabledComboBoxItem.Content" xml:space="preserve">
+    <value>사용 안 함</value>
+  </data>
 
   <data name="ServiceToggleSwitch.OnContent" xml:space="preserve">
     <value>활성화</value>

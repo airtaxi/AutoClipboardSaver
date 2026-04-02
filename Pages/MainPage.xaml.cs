@@ -37,6 +37,17 @@ public sealed partial class MainPage : Page
             }
         }
 
+        ExpirationComboBox.IsEnabled = Configuration.SaveWithTimestamp;
+        var expirationMinutes = Configuration.ExpirationMinutes;
+        foreach (ComboBoxItem item in ExpirationComboBox.Items.Cast<ComboBoxItem>())
+        {
+            if (int.TryParse((string)item.Tag, out int tag) && tag == expirationMinutes)
+            {
+                ExpirationComboBox.SelectedItem = item;
+                break;
+            }
+        }
+
         _isInitializing = false;
     }
 
@@ -57,6 +68,7 @@ public sealed partial class MainPage : Page
 
         Configuration.SaveWithTimestamp = SaveWithTimestampToggleSwitch.IsOn;
         MaxImagesComboBox.IsEnabled = SaveWithTimestampToggleSwitch.IsOn;
+        ExpirationComboBox.IsEnabled = SaveWithTimestampToggleSwitch.IsOn;
     }
 
     private void OnMaxImagesComboBoxSelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -65,6 +77,14 @@ public sealed partial class MainPage : Page
         if (MaxImagesComboBox.SelectedItem is not ComboBoxItem selectedItem) return;
         if (int.TryParse((string)selectedItem.Tag, out int maximumImages))
             Configuration.MaxImages = maximumImages;
+    }
+
+    private void OnExpirationComboBoxSelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        if (_isInitializing) return;
+        if (ExpirationComboBox.SelectedItem is not ComboBoxItem selectedItem) return;
+        if (int.TryParse((string)selectedItem.Tag, out int expirationMinutes))
+            Configuration.ExpirationMinutes = expirationMinutes;
     }
 
     private void OnLaunchOnStartupCheckBoxClicked(object sender, RoutedEventArgs e) =>

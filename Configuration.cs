@@ -37,6 +37,17 @@ public static class Configuration
         set => s_localSettings.Values["SaveDirectoryPath"] = value;
     }
 
+    public static int ExpirationMinutes
+    {
+        get
+        {
+            s_localSettings.Values.TryGetValue("ExpirationMinutes", out object value);
+            if (value == null) return -1;
+            return (int)value;
+        }
+        set => s_localSettings.Values["ExpirationMinutes"] = value;
+    }
+
     public static bool SaveWithTimestamp
     {
         get
