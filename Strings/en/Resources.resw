@@ -41,6 +41,13 @@
     <value>Launch on system startup</value>
   </data>
 
+  <data name="ServiceToggleSwitch.OnContent" xml:space="preserve">
+    <value>Enabled</value>
+  </data>
+  <data name="ServiceToggleSwitch.OffContent" xml:space="preserve">
+    <value>Disabled</value>
+  </data>
+
   <!-- SettingsWindow -->
   <data name="AppTitleBar.Title" xml:space="preserve">
     <value>Auto Clipboard Saver</value>

@@ -11,6 +11,8 @@ namespace AutoClipboardSaver;
 
 public sealed partial class ClipboardMonitor : IDisposable
 {
+    public bool IsRecording { get; set; } = true;
+
     private int _isProcessing;
 
     public void Start() => Clipboard.ContentChanged += OnClipboardContentChanged;
@@ -19,7 +21,8 @@ public sealed partial class ClipboardMonitor : IDisposable
 
     private async void OnClipboardContentChanged(object sender, object args)
     {
-        if (Interlocked.Exchange(ref _isProcessing, 1) == 1) return;
+        if (!IsRecording) return;
+        else if (Interlocked.Exchange(ref _isProcessing, 1) == 1) return;
 
         try
         {

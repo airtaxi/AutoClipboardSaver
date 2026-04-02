@@ -56,6 +56,14 @@
             Grid.Row="0"
             IsBackButtonVisible="False"
             IsPaneToggleButtonVisible="False">
+            <TitleBar.RightHeader>
+                <ToggleSwitch
+                    x:Name="ServiceToggleSwitch"
+                    x:Uid="ServiceToggleSwitch"
+                    Margin="4,0,0,0"
+                    IsOn="True"
+                    Toggled="OnServiceToggleSwitchToggled" />
+            </TitleBar.RightHeader>
             <TitleBar.IconSource>
                 <ImageIconSource ImageSource="ms-appx:///Assets/logo.png" />
             </TitleBar.IconSource>

@@ -14,13 +14,15 @@ public partial class App : Application
         InitializeComponent();
     }
 
-    protected override void OnLaunched(Microsoft.UI.Xaml.LaunchActivatedEventArgs args)
+    protected override void OnLaunched(LaunchActivatedEventArgs args)
     {
-        s_settingsWindow = new SettingsWindow();
-
         s_clipboardMonitor = new ClipboardMonitor();
         s_clipboardMonitor.Start();
+
+        s_settingsWindow = new SettingsWindow();
     }
+
+    public static void SetClipboardRecording(bool isRecording) => s_clipboardMonitor.IsRecording = isRecording;
 
     public static void ShowSettingsWindow() => s_settingsWindow.Activate();
 }

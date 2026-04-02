@@ -41,6 +41,13 @@
     <value>시스템 시작 시 자동 실행</value>
   </data>
 
+  <data name="ServiceToggleSwitch.OnContent" xml:space="preserve">
+    <value>활성화</value>
+  </data>
+  <data name="ServiceToggleSwitch.OffContent" xml:space="preserve">
+    <value>비활성화</value>
+  </data>
+
   <!-- SettingsWindow -->
   <data name="AppTitleBar.Title" xml:space="preserve">
     <value>Auto Clipboard Saver</value>

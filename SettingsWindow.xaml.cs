@@ -33,16 +33,6 @@ public sealed partial class SettingsWindow : WindowEx
         AppFrame.Navigate(typeof(MainPage));
     }
 
-    private void OnRootElementLoaded(object sender, RoutedEventArgs e)
-    {
-        var element = (FrameworkElement)sender;
-
-        ResizeWindowToContent(element, true);
-        //Activate();
-
-        element.LayoutUpdated += (_, _) => ResizeWindowToContent(element, false);
-    }
-
     private void ResizeWindowToContent(FrameworkElement element, bool updateMeasure)
     {
         if (_isResizing || element?.XamlRoot == null) return;
@@ -64,12 +54,32 @@ public sealed partial class SettingsWindow : WindowEx
         }
         finally { _isResizing = false; }
     }
-    private void OnOnOpenSettingsWindowMenuFlyoutItemClicked(XamlUICommand sender, ExecuteRequestedEventArgs args) => App.ShowSettingsWindow();
-    private void OnCloseProgramMenuFlyoutItemClicked(XamlUICommand sender, ExecuteRequestedEventArgs args) => Environment.Exit(0);
+
+    private void OnRootElementLoaded(object sender, RoutedEventArgs e)
+    {
+        var element = (FrameworkElement)sender;
+
+        ResizeWindowToContent(element, true);
+        //Activate();
+
+        element.LayoutUpdated += (_, _) => ResizeWindowToContent(element, false);
+    }
+
+    private void OnServiceToggleSwitchToggled(object sender, RoutedEventArgs e)
+    {
+        var toggle = sender as ToggleSwitch;
+        if (toggle == null) return;
+
+        var isOn = toggle.IsOn;
+        App.SetClipboardRecording(isOn);
+    }
 
     private void OnClosed(object sender, WindowEventArgs args)
     {
         args.Handled = true;
         this.Hide();
     }
+
+    private void OnOnOpenSettingsWindowMenuFlyoutItemClicked(XamlUICommand sender, ExecuteRequestedEventArgs args) => App.ShowSettingsWindow();
+    private void OnCloseProgramMenuFlyoutItemClicked(XamlUICommand sender, ExecuteRequestedEventArgs args) => Environment.Exit(0);
 }
