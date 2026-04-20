@@ -1,4 +1,5 @@
 using AutoClipboardSaver.Pages;
+using CommunityToolkit.Mvvm.Input;
 using Microsoft.UI;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
@@ -80,6 +81,7 @@ public sealed partial class SettingsWindow : WindowEx
         this.Hide();
     }
 
-    private void OnOnOpenSettingsWindowMenuFlyoutItemClicked(XamlUICommand sender, ExecuteRequestedEventArgs args) => App.ShowSettingsWindow();
+    [RelayCommand]
+    private void OpenSettingsWindow() => App.ShowSettingsWindow();
     private void OnCloseProgramMenuFlyoutItemClicked(XamlUICommand sender, ExecuteRequestedEventArgs args) => Environment.Exit(0);
 }

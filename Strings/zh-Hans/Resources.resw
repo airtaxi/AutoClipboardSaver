@@ -58,6 +58,9 @@
   <data name="AppTitleBar.Title" xml:space="preserve">
     <value>Auto Clipboard Saver</value>
   </data>
+  <data name="TaskbarIcon.TrayToolTip" xml:space="preserve">
+    <value>Auto Clipboard Saver</value>
+  </data>
   <data name="AuthorMenuFlyoutItem.Text" xml:space="preserve">
     <value>作者: Howon Lee (airtaxi)</value>
   </data>

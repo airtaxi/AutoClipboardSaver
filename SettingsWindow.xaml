@@ -26,7 +26,9 @@
         </Grid.RowDefinitions>
         <tb:TaskbarIcon
             x:Name="TaskbarIcon"
+            x:Uid="TaskbarIcon"
             ContextMenuMode="SecondWindow"
+            LeftClickCommand="{x:Bind OpenSettingsWindowCommand}"
             MenuActivation="RightClick"
             NoLeftClickDelay="True">
             <tb:TaskbarIcon.IconSource>
@@ -37,7 +39,7 @@
                     <MenuFlyoutItem x:Uid="AuthorMenuFlyoutItem" IsEnabled="False" />
                     <MenuFlyoutItem x:Uid="OpenSettingsMenuFlyoutItem">
                         <MenuFlyoutItem.Command>
-                            <XamlUICommand ExecuteRequested="OnOnOpenSettingsWindowMenuFlyoutItemClicked" />
+                            <XamlUICommand Command="{x:Bind OpenSettingsWindowCommand}" />
                         </MenuFlyoutItem.Command>
                     </MenuFlyoutItem>
                     <MenuFlyoutSeparator />
