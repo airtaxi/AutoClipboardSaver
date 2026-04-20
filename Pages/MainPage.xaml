@@ -37,6 +37,15 @@
             Toggled="OnSaveWithTimestampToggleSwitchToggled" />
 
         <ComboBox
+            x:Name="FileFormatComboBox"
+            x:Uid="FileFormatComboBox"
+            SelectionChanged="OnFileFormatComboBoxSelectionChanged">
+            <ComboBoxItem Tag="jpg">JPG</ComboBoxItem>
+            <ComboBoxItem Tag="png">PNG</ComboBoxItem>
+            <ComboBoxItem Tag="bmp">BMP</ComboBoxItem>
+        </ComboBox>
+
+        <ComboBox
             x:Name="MaxImagesComboBox"
             x:Uid="MaxImagesComboBox"
             SelectionChanged="OnMaxImagesComboBoxSelectionChanged">

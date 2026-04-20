@@ -27,6 +27,16 @@ public sealed partial class MainPage : Page
         MaxImagesComboBox.IsEnabled = Configuration.SaveWithTimestamp;
         LaunchOnStartupCheckBox.IsChecked = Configuration.LaunchOnStartup;
 
+        var saveFileFormat = Configuration.SaveFileFormat;
+        foreach (ComboBoxItem item in FileFormatComboBox.Items.Cast<ComboBoxItem>())
+        {
+            if ((string)item.Tag == saveFileFormat)
+            {
+                FileFormatComboBox.SelectedItem = item;
+                break;
+            }
+        }
+
         var maximumImages = Configuration.MaxImages;
         foreach (ComboBoxItem item in MaxImagesComboBox.Items.Cast<ComboBoxItem>())
         {
@@ -69,6 +79,13 @@ public sealed partial class MainPage : Page
         Configuration.SaveWithTimestamp = SaveWithTimestampToggleSwitch.IsOn;
         MaxImagesComboBox.IsEnabled = SaveWithTimestampToggleSwitch.IsOn;
         ExpirationComboBox.IsEnabled = SaveWithTimestampToggleSwitch.IsOn;
+    }
+
+    private void OnFileFormatComboBoxSelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        if (_isInitializing) return;
+        if (FileFormatComboBox.SelectedItem is not ComboBoxItem selectedItem) return;
+        Configuration.SaveFileFormat = (string)selectedItem.Tag;
     }
 
     private void OnMaxImagesComboBoxSelectionChanged(object sender, SelectionChangedEventArgs e)

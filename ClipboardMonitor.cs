@@ -35,8 +35,11 @@ public sealed partial class ClipboardMonitor : IDisposable
         var saveDirectoryPath = Configuration.SaveDirectoryPath;
         if (Directory.Exists(saveDirectoryPath))
         {
-            foreach (var filePath in Directory.GetFiles(saveDirectoryPath, "clipboard_*.jpg"))
-                _expirationRegistry[filePath] = new FileInfo(filePath).CreationTime;
+            foreach (var format in new[] { "jpg", "png", "bmp" })
+            {
+                foreach (var filePath in Directory.GetFiles(saveDirectoryPath, $"clipboard_*.{format}"))
+                    _expirationRegistry[filePath] = new FileInfo(filePath).CreationTime;
+            }
         }
 
         _expirationTimer = new Timer(OnExpirationTimerTick, null, TimeSpan.FromSeconds(1), TimeSpan.FromSeconds(1));
@@ -95,14 +98,22 @@ public sealed partial class ClipboardMonitor : IDisposable
         if (!Directory.Exists(saveDirectoryPath))
             Directory.CreateDirectory(saveDirectoryPath);
 
+        var saveFileFormat = Configuration.SaveFileFormat;
         string fileName = Configuration.SaveWithTimestamp
-            ? $"clipboard_{DateTime.Now:yyyy-MM-dd_HH-mm-ss}.jpg"
-            : "clipboard.jpg";
+            ? $"clipboard_{DateTime.Now:yyyy-MM-dd_HH-mm-ss}.{saveFileFormat}"
+            : $"clipboard.{saveFileFormat}";
         string filePath = Path.Combine(saveDirectoryPath, fileName);
 
-        // Encode to JPEG in memory
+        var encoderId = saveFileFormat switch
+        {
+            "png" => BitmapEncoder.PngEncoderId,
+            "bmp" => BitmapEncoder.BmpEncoderId,
+            _ => BitmapEncoder.JpegEncoderId
+        };
+
+        // Encode to the selected format in memory
         using var outputStream = new InMemoryRandomAccessStream();
-        var encoder = await BitmapEncoder.CreateAsync(BitmapEncoder.JpegEncoderId, outputStream);
+        var encoder = await BitmapEncoder.CreateAsync(encoderId, outputStream);
         encoder.SetSoftwareBitmap(softwareBitmap);
         await encoder.FlushAsync();
 
@@ -124,7 +135,7 @@ public sealed partial class ClipboardMonitor : IDisposable
         var maximumImages = Configuration.MaxImages;
         if (maximumImages < 0) return;
 
-        var imageFiles = Directory.GetFiles(directoryPath, "clipboard_*.jpg")
+        var imageFiles = Directory.GetFiles(directoryPath, $"clipboard_*.{Configuration.SaveFileFormat}")
             .Select(filePath => new FileInfo(filePath))
             .OrderByDescending(fileInfo => fileInfo.CreationTime)
             .ToList();

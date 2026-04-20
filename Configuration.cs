@@ -59,6 +59,17 @@ public static class Configuration
         set => s_localSettings.Values["SaveWithTimestamp"] = value;
     }
 
+    public static string SaveFileFormat
+    {
+        get
+        {
+            s_localSettings.Values.TryGetValue("SaveFileFormat", out object value);
+            if (value == null) return "jpg";
+            return (string)value;
+        }
+        set => s_localSettings.Values["SaveFileFormat"] = value;
+    }
+
     public static bool LaunchOnStartup
     {
         get
