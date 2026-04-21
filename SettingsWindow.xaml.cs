@@ -1,5 +1,6 @@
 using AutoClipboardSaver.Pages;
 using CommunityToolkit.Mvvm.Input;
+using H.NotifyIcon;
 using Microsoft.UI;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
@@ -30,6 +31,10 @@ public sealed partial class SettingsWindow : WindowEx
         // Localized window title
         var resourceLoader = new ResourceLoader();
         Title = resourceLoader.GetString("AppDisplayName");
+
+        // Since Activate() isn't called by default, we can set up the TaskbarIcon commands here
+        TaskbarIcon.LeftClickCommand = OpenSettingsWindowCommand;
+        OpenSettingsMenuFlyoutItem.Command = OpenSettingsWindowCommand;
 
         AppFrame.Navigate(typeof(MainPage));
     }

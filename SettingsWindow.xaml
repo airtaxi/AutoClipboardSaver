@@ -28,7 +28,6 @@
             x:Name="TaskbarIcon"
             x:Uid="TaskbarIcon"
             ContextMenuMode="SecondWindow"
-            LeftClickCommand="{x:Bind OpenSettingsWindowCommand}"
             MenuActivation="RightClick"
             NoLeftClickDelay="True">
             <tb:TaskbarIcon.IconSource>
@@ -37,11 +36,7 @@
             <tb:TaskbarIcon.ContextFlyout>
                 <MenuFlyout AreOpenCloseAnimationsEnabled="True">
                     <MenuFlyoutItem x:Uid="AuthorMenuFlyoutItem" IsEnabled="False" />
-                    <MenuFlyoutItem x:Uid="OpenSettingsMenuFlyoutItem">
-                        <MenuFlyoutItem.Command>
-                            <XamlUICommand Command="{x:Bind OpenSettingsWindowCommand}" />
-                        </MenuFlyoutItem.Command>
-                    </MenuFlyoutItem>
+                    <MenuFlyoutItem x:Name="OpenSettingsMenuFlyoutItem" x:Uid="OpenSettingsMenuFlyoutItem" />
                     <MenuFlyoutSeparator />
                     <MenuFlyoutItem x:Uid="CloseMenuFlyoutItem">
                         <MenuFlyoutItem.Command>
