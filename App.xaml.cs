@@ -43,11 +43,5 @@ public partial class App : Application
         if (s_settingsWindow != null) s_settingsWindow.DispatcherQueue.TryEnqueue(() => s_settingsWindow.RefreshLocalizedContent());
     }
 
-    public static void Shutdown()
-    {
-        s_clipboardMonitor?.Dispose();
-        s_settingsWindow?.ForceClose();
-    }
-
     private static void ApplyLanguage(string languageTag) => ApplicationLanguages.PrimaryLanguageOverride = languageTag;
 }

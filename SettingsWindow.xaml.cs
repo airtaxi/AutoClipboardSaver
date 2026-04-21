@@ -162,7 +162,7 @@ public sealed partial class SettingsWindow : WindowEx
                 return 1;
 
             case WindowMessageEndSession:
-                if (windowParameter != 0) App.Shutdown();
+                if (windowParameter != 0) Environment.Exit(0);
                 return 0;
 
             case WindowMessageClose:
@@ -258,7 +258,7 @@ public sealed partial class SettingsWindow : WindowEx
             resourceLoader.GetString("DialogCloseButtonText"));
     }
 
-    private void OnCloseProgramMenuFlyoutItemClicked(XamlUICommand sender, ExecuteRequestedEventArgs args) => App.Shutdown();
+    private void OnCloseProgramMenuFlyoutItemClicked(XamlUICommand sender, ExecuteRequestedEventArgs args) => Environment.Exit(0);
 
     private void UpdateSelectedLanguageMenuItems()
     {
