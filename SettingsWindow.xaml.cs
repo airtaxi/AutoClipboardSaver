@@ -8,6 +8,7 @@ using Microsoft.UI.Xaml.Input;
 using Microsoft.Windows.ApplicationModel.Resources;
 using System;
 using System.Runtime.InteropServices;
+using System.Threading.Tasks;
 using Windows.Foundation;
 using WinUIEx;
 
@@ -34,9 +35,12 @@ public sealed partial class SettingsWindow : WindowEx
     private bool _forceClose;
     private bool _systemShutdown;
 
+    private static SettingsWindow Instance { get; set; }
+
     public SettingsWindow()
     {
         InitializeComponent();
+        Instance = this;
 
         // Set window icons
         AppWindow.SetIcon("Assets/logo.ico");
@@ -45,10 +49,6 @@ public sealed partial class SettingsWindow : WindowEx
         ExtendsContentIntoTitleBar = true;
         SetTitleBar(AppTitleBar);
 
-        // Localized window title
-        var resourceLoader = new ResourceLoader();
-        Title = resourceLoader.GetString("AppDisplayName");
-
         // Since Activate() isn't called by default, we can set up the TaskbarIcon commands here
         TaskbarIcon.LeftClickCommand = OpenSettingsWindowCommand;
         OpenSettingsMenuFlyoutItem.Command = OpenSettingsWindowCommand;
@@ -56,7 +56,32 @@ public sealed partial class SettingsWindow : WindowEx
         _windowSubclassProcedure = WindowSubclassProc;
         SetWindowSubclass(this.GetWindowHandle(), _windowSubclassProcedure, 1, 0);
 
-        AppFrame.Navigate(typeof(MainPage));
+        RefreshLocalizedContent();
+    }
+
+    public static void ShowLoading(string message)
+    {
+        Instance.DispatcherQueue.TryEnqueue(() =>
+        {
+            Instance.AppFrame.IsEnabled = false;
+            Instance.LoadingGrid.Visibility = Visibility.Visible;
+            if (!string.IsNullOrEmpty(message))
+            {
+                Instance.LoadingTextBlock.Text = message;
+                Instance.LoadingTextBlock.Visibility = Visibility.Visible;
+            }
+            else Instance.LoadingTextBlock.Visibility = Visibility.Collapsed;
+        });
+    }
+
+    public static void HideLoading()
+    {
+        Instance.DispatcherQueue.TryEnqueue(() =>
+        {
+            Instance.LoadingGrid.Visibility = Visibility.Collapsed;
+            Instance.LoadingTextBlock.Visibility = Visibility.Collapsed;
+            Instance.AppFrame.IsEnabled = true;
+        });
     }
 
     private void ResizeWindowToContent(FrameworkElement element, bool updateMeasure)
@@ -100,6 +125,34 @@ public sealed partial class SettingsWindow : WindowEx
         App.SetClipboardRecording(isOn);
     }
 
+    public void RefreshLocalizedContent()
+    {
+        var resourceLoader = new ResourceLoader();
+
+        Title = resourceLoader.GetString("AppDisplayName");
+        AppTitleBar.Title = resourceLoader.GetString("AppTitleBar/Title");
+        TaskbarIcon.ToolTipText = resourceLoader.GetString("TaskbarIcon/ToolTipText");
+        AuthorMenuFlyoutItem.Text = resourceLoader.GetString("AuthorMenuFlyoutItem/Text");
+        OpenSettingsMenuFlyoutItem.Text = resourceLoader.GetString("OpenSettingsMenuFlyoutItem/Text");
+        LanguageMenuBarItem.Title = resourceLoader.GetString("LanguageMenuBarItem/Title");
+        HelpMenuBarItem.Title = resourceLoader.GetString("HelpMenuBarItem/Title");
+        EnglishLanguageRadioMenuFlyoutItem.Text = resourceLoader.GetString("EnglishLanguageRadioMenuFlyoutItem/Text");
+        KoreanLanguageRadioMenuFlyoutItem.Text = resourceLoader.GetString("KoreanLanguageRadioMenuFlyoutItem/Text");
+        JapaneseLanguageRadioMenuFlyoutItem.Text = resourceLoader.GetString("JapaneseLanguageRadioMenuFlyoutItem/Text");
+        ChineseSimplifiedLanguageRadioMenuFlyoutItem.Text = resourceLoader.GetString("ChineseSimplifiedLanguageRadioMenuFlyoutItem/Text");
+        ChineseTraditionalLanguageRadioMenuFlyoutItem.Text = resourceLoader.GetString("ChineseTraditionalLanguageRadioMenuFlyoutItem/Text");
+        CheckForUpdatesMenuFlyoutItem.Text = resourceLoader.GetString("CheckForUpdatesMenuFlyoutItem/Text");
+        CreatorGitHubMenuFlyoutItem.Text = resourceLoader.GetString("CreatorGitHubMenuFlyoutItem/Text");
+        CloseMenuFlyoutItem.Text = resourceLoader.GetString("CloseMenuFlyoutItem/Text");
+        ServiceToggleSwitch.OnContent = resourceLoader.GetString("ServiceToggleSwitch/OnContent");
+        ServiceToggleSwitch.OffContent = resourceLoader.GetString("ServiceToggleSwitch/OffContent");
+
+        if (AppFrame.Content is MainPage mainPage) mainPage.RefreshLocalizedContent();
+        else AppFrame.Navigate(typeof(MainPage));
+
+        UpdateSelectedLanguageMenuItems();
+    }
+
     private nint WindowSubclassProc(nint windowHandle, uint message, nint windowParameter, nint longParameter, nuint subclassIdentifier, nuint referenceData)
     {
         switch (message)
@@ -124,7 +177,133 @@ public sealed partial class SettingsWindow : WindowEx
 
     [RelayCommand]
     private void OpenSettingsWindow() => App.ShowSettingsWindow();
+
+    private void OnLanguageRadioMenuFlyoutItemClicked(object sender, RoutedEventArgs e)
+    {
+        if (sender is not RadioMenuFlyoutItem radioMenuFlyoutItem) return;
+        if (radioMenuFlyoutItem.Tag is not string languageTag) return;
+        if (Configuration.LanguageTag == languageTag)
+        {
+            UpdateSelectedLanguageMenuItems();
+            return;
+        }
+
+        App.SetLanguage(languageTag);
+    }
+
+    private async void OnCheckForUpdatesMenuFlyoutItemClicked(object sender, RoutedEventArgs routedEventArgs)
+    {
+        var resourceLoader = new ResourceLoader();
+        var hasStoreUpdate = false;
+        var currentPackageVersion = string.Empty;
+        Exception caughtException = null;
+
+        try
+        {
+            ShowLoading(resourceLoader.GetString("UpdateCheckDialog/Title"));
+            hasStoreUpdate = await UpdateCheckManager.HasStoreUpdateAsync();
+            if (!hasStoreUpdate) currentPackageVersion = UpdateCheckManager.GetCurrentPackageVersion();
+        }
+        catch (Exception exception)
+        {
+            caughtException = exception;
+        }
+        finally
+        {
+            HideLoading();
+        }
+
+        if (caughtException != null)
+        {
+            var contentDialogResult = await ShowContentDialogAsync(
+                resourceLoader.GetString("UpdateCheckDialog/Title"),
+                string.Format(resourceLoader.GetString("UpdateCheckFailedDialog/Content"), Environment.NewLine, caughtException.Message),
+                resourceLoader.GetString("UpdateAvailableDialog/PrimaryButtonText"),
+                resourceLoader.GetString("DialogCloseButtonText"));
+
+            if (contentDialogResult == ContentDialogResult.Primary)
+                await TryOpenStorePageAsync(resourceLoader);
+            return;
+        }
+
+        if (hasStoreUpdate)
+        {
+            var contentDialogResult = await ShowContentDialogAsync(
+                resourceLoader.GetString("UpdateCheckDialog/Title"),
+                resourceLoader.GetString("UpdateAvailableDialog/Content"),
+                resourceLoader.GetString("UpdateAvailableDialog/PrimaryButtonText"),
+                resourceLoader.GetString("DialogCloseButtonText"));
+
+            if (contentDialogResult == ContentDialogResult.Primary)
+                await TryOpenStorePageAsync(resourceLoader);
+            return;
+        }
+
+        await ShowContentDialogAsync(
+            resourceLoader.GetString("UpdateCheckDialog/Title"),
+            string.Format(resourceLoader.GetString("UpdateLatestDialog/Content"), currentPackageVersion),
+            string.Empty,
+            resourceLoader.GetString("DialogCloseButtonText"));
+    }
+
+    private async void OnCreatorGitHubMenuFlyoutItemClicked(object sender, RoutedEventArgs routedEventArgs)
+    {
+        var resourceLoader = new ResourceLoader();
+        if (await UpdateCheckManager.OpenCreatorGitHubRepositoryAsync()) return;
+
+        await ShowContentDialogAsync(
+            resourceLoader.GetString("CreatorGitHubDialog/Title"),
+            resourceLoader.GetString("CreatorGitHubDialog/Content"),
+            string.Empty,
+            resourceLoader.GetString("DialogCloseButtonText"));
+    }
+
     private void OnCloseProgramMenuFlyoutItemClicked(XamlUICommand sender, ExecuteRequestedEventArgs args) => App.Shutdown();
+
+    private void UpdateSelectedLanguageMenuItems()
+    {
+        var selectedLanguageTag = Configuration.LanguageTag;
+
+        EnglishLanguageRadioMenuFlyoutItem.IsChecked = selectedLanguageTag == "en";
+        KoreanLanguageRadioMenuFlyoutItem.IsChecked = selectedLanguageTag == "ko";
+        JapaneseLanguageRadioMenuFlyoutItem.IsChecked = selectedLanguageTag == "ja";
+        ChineseSimplifiedLanguageRadioMenuFlyoutItem.IsChecked = selectedLanguageTag == "zh-Hans";
+        ChineseTraditionalLanguageRadioMenuFlyoutItem.IsChecked = selectedLanguageTag == "zh-Hant";
+    }
+
+    private async Task<ContentDialogResult> ShowContentDialogAsync(string title, string content, string primaryButtonText, string closeButtonText)
+    {
+        if (Content is not FrameworkElement rootElement)
+            throw new InvalidOperationException("The window content root element is unavailable.");
+
+        var contentDialog = new ContentDialog
+        {
+            XamlRoot = rootElement.XamlRoot,
+            Title = title,
+            Content = content,
+            CloseButtonText = closeButtonText
+        };
+
+        if (!string.IsNullOrWhiteSpace(primaryButtonText))
+        {
+            contentDialog.PrimaryButtonText = primaryButtonText;
+            contentDialog.DefaultButton = ContentDialogButton.Primary;
+        }
+
+        return await contentDialog.ShowAsync();
+    }
+
+    private async Task TryOpenStorePageAsync(ResourceLoader resourceLoader)
+    {
+        if (await UpdateCheckManager.OpenStorePageAsync()) return;
+
+        await ShowContentDialogAsync(
+            resourceLoader.GetString("StoreOpenDialog/Title"),
+            resourceLoader.GetString("StoreOpenDialog/Content"),
+            string.Empty,
+            resourceLoader.GetString("DialogCloseButtonText"));
+    }
+
     public void ForceClose()
     {
         _forceClose = true;

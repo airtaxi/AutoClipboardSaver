@@ -1,6 +1,7 @@
 using Microsoft.UI.Windowing;
 using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
+using Microsoft.Windows.ApplicationModel.Resources;
 using Microsoft.Windows.Storage.Pickers;
 using System;
 using System.Linq;
@@ -21,6 +22,7 @@ public sealed partial class MainPage : Page
     private void OnLoaded(object sender, RoutedEventArgs e)
     {
         _isInitializing = true;
+        RefreshLocalizedContent();
 
         SaveDirectoryPathTextBox.Text = Configuration.SaveDirectoryPath;
         SaveWithTimestampToggleSwitch.IsOn = Configuration.SaveWithTimestamp;
@@ -59,6 +61,21 @@ public sealed partial class MainPage : Page
         }
 
         _isInitializing = false;
+    }
+
+    public void RefreshLocalizedContent()
+    {
+        var resourceLoader = new ResourceLoader();
+
+        SaveDirectoryPathTextBox.Header = resourceLoader.GetString("SaveDirectoryPathTextBox/Header");
+        SaveWithTimestampToggleSwitch.OnContent = resourceLoader.GetString("SaveWithTimestampToggleSwitch/OnContent");
+        SaveWithTimestampToggleSwitch.OffContent = resourceLoader.GetString("SaveWithTimestampToggleSwitch/OffContent");
+        FileFormatComboBox.Header = resourceLoader.GetString("FileFormatComboBox/Header");
+        MaxImagesComboBox.Header = resourceLoader.GetString("MaxImagesComboBox/Header");
+        UnlimitedComboBoxItem.Content = resourceLoader.GetString("UnlimitedComboBoxItem/Content");
+        ExpirationComboBox.Header = resourceLoader.GetString("ExpirationComboBox/Header");
+        ExpirationDisabledComboBoxItem.Content = resourceLoader.GetString("ExpirationDisabledComboBoxItem/Content");
+        LaunchOnStartupCheckBox.Content = resourceLoader.GetString("LaunchOnStartupCheckBox/Content");
     }
 
     private async void OnBrowseFolderButtonClicked(object sender, RoutedEventArgs e)

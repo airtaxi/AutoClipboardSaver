@@ -1,4 +1,5 @@
-﻿using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml;
+using Windows.Globalization;
 
 namespace AutoClipboardSaver;
 
@@ -16,6 +17,8 @@ public partial class App : Application
 
     protected override void OnLaunched(LaunchActivatedEventArgs launchActivatedEventArgs)
     {
+        ApplyLanguage(Configuration.LanguageTag);
+
         s_clipboardMonitor = new ClipboardMonitor();
         s_clipboardMonitor.Start();
 
@@ -33,9 +36,18 @@ public partial class App : Application
         });
     }
 
+    public static void SetLanguage(string languageTag)
+    {
+        Configuration.LanguageTag = languageTag;
+        ApplyLanguage(Configuration.LanguageTag);
+        if (s_settingsWindow != null) s_settingsWindow.DispatcherQueue.TryEnqueue(() => s_settingsWindow.RefreshLocalizedContent());
+    }
+
     public static void Shutdown()
     {
         s_clipboardMonitor?.Dispose();
         s_settingsWindow?.ForceClose();
     }
+
+    private static void ApplyLanguage(string languageTag) => ApplicationLanguages.PrimaryLanguageOverride = languageTag;
 }

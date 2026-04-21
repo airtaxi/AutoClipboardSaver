@@ -165,10 +165,67 @@
   <data name="OpenSettingsMenuFlyoutItem.Text" xml:space="preserve">
     <value>打开设置窗口</value>
   </data>
+  <data name="LanguageMenuBarItem.Title" xml:space="preserve">
+    <value>语言</value>
+  </data>
+  <data name="HelpMenuBarItem.Title" xml:space="preserve">
+    <value>帮助</value>
+  </data>
+  <data name="EnglishLanguageRadioMenuFlyoutItem.Text" xml:space="preserve">
+    <value>英语</value>
+  </data>
+  <data name="KoreanLanguageRadioMenuFlyoutItem.Text" xml:space="preserve">
+    <value>韩语</value>
+  </data>
+  <data name="JapaneseLanguageRadioMenuFlyoutItem.Text" xml:space="preserve">
+    <value>日语</value>
+  </data>
+  <data name="ChineseSimplifiedLanguageRadioMenuFlyoutItem.Text" xml:space="preserve">
+    <value>中文（简体）</value>
+  </data>
+  <data name="ChineseTraditionalLanguageRadioMenuFlyoutItem.Text" xml:space="preserve">
+    <value>中文（繁體）</value>
+  </data>
+  <data name="CheckForUpdatesMenuFlyoutItem.Text" xml:space="preserve">
+    <value>检查更新</value>
+  </data>
+  <data name="CreatorGitHubMenuFlyoutItem.Text" xml:space="preserve">
+    <value>作者 GitHub</value>
+  </data>
   <data name="CloseMenuFlyoutItem.Text" xml:space="preserve">
     <value>关闭</value>
   </data>
   <data name="TaskbarIcon.ToolTipText" xml:space="preserve">
     <value>Auto Clipboard Saver</value>
+  </data>
+  <data name="UpdateCheckDialog.Title" xml:space="preserve">
+    <value>检查更新</value>
+  </data>
+  <data name="UpdateAvailableDialog.Content" xml:space="preserve">
+    <value>Microsoft Store 中有新版本可用。</value>
+  </data>
+  <data name="UpdateAvailableDialog.PrimaryButtonText" xml:space="preserve">
+    <value>打开 Microsoft Store</value>
+  </data>
+  <data name="UpdateLatestDialog.Content" xml:space="preserve">
+    <value>当前已是最新版本（{0}）。</value>
+  </data>
+  <data name="UpdateCheckFailedDialog.Content" xml:space="preserve">
+    <value>无法自动检查更新。{0}{0}{1}</value>
+  </data>
+  <data name="CreatorGitHubDialog.Title" xml:space="preserve">
+    <value>作者 GitHub</value>
+  </data>
+  <data name="CreatorGitHubDialog.Content" xml:space="preserve">
+    <value>无法打开作者 GitHub 页面。</value>
+  </data>
+  <data name="StoreOpenDialog.Title" xml:space="preserve">
+    <value>Microsoft Store</value>
+  </data>
+  <data name="StoreOpenDialog.Content" xml:space="preserve">
+    <value>无法打开 Microsoft Store 页面。</value>
+  </data>
+  <data name="DialogCloseButtonText" xml:space="preserve">
+    <value>关闭</value>
   </data>
 </root>

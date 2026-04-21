@@ -121,40 +121,40 @@
     <value>Auto Clipboard Saver</value>
   </data>
   <data name="AppDescription" xml:space="preserve">
-    <value>クリップボードの画像を自動的にフォルダに保存します</value>
+    <value>自動將剪貼簿圖片儲存到資料夾</value>
   </data>
   <data name="SaveDirectoryPathTextBox.Header" xml:space="preserve">
-    <value>保存先フォルダ</value>
+    <value>儲存目錄路徑</value>
   </data>
   <data name="SaveWithTimestampToggleSwitch.OnContent" xml:space="preserve">
-    <value>タイムスタンプ付きで保存</value>
+    <value>以時間戳記儲存</value>
   </data>
   <data name="SaveWithTimestampToggleSwitch.OffContent" xml:space="preserve">
-    <value>タイムスタンプなしで保存</value>
+    <value>不以時間戳記儲存</value>
   </data>
   <data name="MaxImagesComboBox.Header" xml:space="preserve">
-    <value>最大画像数</value>
+    <value>最大圖片數</value>
   </data>
   <data name="UnlimitedComboBoxItem.Content" xml:space="preserve">
-    <value>無制限</value>
+    <value>無限制</value>
   </data>
   <data name="LaunchOnStartupCheckBox.Content" xml:space="preserve">
-    <value>システム起動時に自動起動</value>
+    <value>開機自動啟動</value>
   </data>
   <data name="ExpirationComboBox.Header" xml:space="preserve">
-    <value>自動削除時間</value>
+    <value>自動刪除時間</value>
   </data>
   <data name="FileFormatComboBox.Header" xml:space="preserve">
-    <value>ファイル形式</value>
+    <value>檔案格式</value>
   </data>
   <data name="ExpirationDisabledComboBoxItem.Content" xml:space="preserve">
-    <value>無効</value>
+    <value>停用</value>
   </data>
   <data name="ServiceToggleSwitch.OnContent" xml:space="preserve">
-    <value>有効</value>
+    <value>已啟用</value>
   </data>
   <data name="ServiceToggleSwitch.OffContent" xml:space="preserve">
-    <value>無効</value>
+    <value>已停用</value>
   </data>
   <data name="AppTitleBar.Title" xml:space="preserve">
     <value>Auto Clipboard Saver</value>
@@ -163,69 +163,69 @@
     <value>作者: Howon Lee (airtaxi)</value>
   </data>
   <data name="OpenSettingsMenuFlyoutItem.Text" xml:space="preserve">
-    <value>設定ウィンドウを開く</value>
+    <value>開啟設定視窗</value>
   </data>
   <data name="LanguageMenuBarItem.Title" xml:space="preserve">
-    <value>言語</value>
+    <value>語言</value>
   </data>
   <data name="HelpMenuBarItem.Title" xml:space="preserve">
-    <value>ヘルプ</value>
+    <value>說明</value>
   </data>
   <data name="EnglishLanguageRadioMenuFlyoutItem.Text" xml:space="preserve">
-    <value>英語</value>
+    <value>英文</value>
   </data>
   <data name="KoreanLanguageRadioMenuFlyoutItem.Text" xml:space="preserve">
-    <value>韓国語</value>
+    <value>韓文</value>
   </data>
   <data name="JapaneseLanguageRadioMenuFlyoutItem.Text" xml:space="preserve">
-    <value>日本語</value>
+    <value>日文</value>
   </data>
   <data name="ChineseSimplifiedLanguageRadioMenuFlyoutItem.Text" xml:space="preserve">
-    <value>中国語(簡体字)</value>
+    <value>中文（簡體）</value>
   </data>
   <data name="ChineseTraditionalLanguageRadioMenuFlyoutItem.Text" xml:space="preserve">
-    <value>中国語(繁体字)</value>
+    <value>中文（繁體）</value>
   </data>
   <data name="CheckForUpdatesMenuFlyoutItem.Text" xml:space="preserve">
-    <value>更新を確認</value>
+    <value>檢查更新</value>
   </data>
   <data name="CreatorGitHubMenuFlyoutItem.Text" xml:space="preserve">
-    <value>作者GitHub</value>
+    <value>作者 GitHub</value>
   </data>
   <data name="CloseMenuFlyoutItem.Text" xml:space="preserve">
-    <value>閉じる</value>
+    <value>關閉</value>
   </data>
   <data name="TaskbarIcon.ToolTipText" xml:space="preserve">
     <value>Auto Clipboard Saver</value>
   </data>
   <data name="UpdateCheckDialog.Title" xml:space="preserve">
-    <value>更新を確認</value>
+    <value>檢查更新</value>
   </data>
   <data name="UpdateAvailableDialog.Content" xml:space="preserve">
-    <value>Microsoft Store で新しいバージョンを利用できます。</value>
+    <value>Microsoft Store 中有新版本可用。</value>
   </data>
   <data name="UpdateAvailableDialog.PrimaryButtonText" xml:space="preserve">
-    <value>Microsoft Store を開く</value>
+    <value>開啟 Microsoft Store</value>
   </data>
   <data name="UpdateLatestDialog.Content" xml:space="preserve">
-    <value>現在、最新バージョン ({0}) を使用しています。</value>
+    <value>目前已是最新版本（{0}）。</value>
   </data>
   <data name="UpdateCheckFailedDialog.Content" xml:space="preserve">
-    <value>更新を自動で確認できませんでした。{0}{0}{1}</value>
+    <value>無法自動檢查更新。{0}{0}{1}</value>
   </data>
   <data name="CreatorGitHubDialog.Title" xml:space="preserve">
-    <value>作者GitHub</value>
+    <value>作者 GitHub</value>
   </data>
   <data name="CreatorGitHubDialog.Content" xml:space="preserve">
-    <value>作者の GitHub ページを開けませんでした。</value>
+    <value>無法開啟作者 GitHub 頁面。</value>
   </data>
   <data name="StoreOpenDialog.Title" xml:space="preserve">
     <value>Microsoft Store</value>
   </data>
   <data name="StoreOpenDialog.Content" xml:space="preserve">
-    <value>Microsoft Store ページを開けませんでした。</value>
+    <value>無法開啟 Microsoft Store 頁面。</value>
   </data>
   <data name="DialogCloseButtonText" xml:space="preserve">
-    <value>閉じる</value>
+    <value>關閉</value>
   </data>
 </root>

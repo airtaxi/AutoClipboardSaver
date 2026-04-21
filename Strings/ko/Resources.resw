@@ -165,10 +165,67 @@
   <data name="OpenSettingsMenuFlyoutItem.Text" xml:space="preserve">
     <value>설정 창 열기</value>
   </data>
+  <data name="LanguageMenuBarItem.Title" xml:space="preserve">
+    <value>언어</value>
+  </data>
+  <data name="HelpMenuBarItem.Title" xml:space="preserve">
+    <value>도움말</value>
+  </data>
+  <data name="EnglishLanguageRadioMenuFlyoutItem.Text" xml:space="preserve">
+    <value>영어</value>
+  </data>
+  <data name="KoreanLanguageRadioMenuFlyoutItem.Text" xml:space="preserve">
+    <value>한국어</value>
+  </data>
+  <data name="JapaneseLanguageRadioMenuFlyoutItem.Text" xml:space="preserve">
+    <value>일본어</value>
+  </data>
+  <data name="ChineseSimplifiedLanguageRadioMenuFlyoutItem.Text" xml:space="preserve">
+    <value>중국어(간체)</value>
+  </data>
+  <data name="ChineseTraditionalLanguageRadioMenuFlyoutItem.Text" xml:space="preserve">
+    <value>중국어(번체)</value>
+  </data>
+  <data name="CheckForUpdatesMenuFlyoutItem.Text" xml:space="preserve">
+    <value>업데이트 확인</value>
+  </data>
+  <data name="CreatorGitHubMenuFlyoutItem.Text" xml:space="preserve">
+    <value>제작자 GitHub</value>
+  </data>
   <data name="CloseMenuFlyoutItem.Text" xml:space="preserve">
     <value>닫기</value>
   </data>
   <data name="TaskbarIcon.ToolTipText" xml:space="preserve">
     <value>Auto Clipboard Saver</value>
+  </data>
+  <data name="UpdateCheckDialog.Title" xml:space="preserve">
+    <value>업데이트 확인</value>
+  </data>
+  <data name="UpdateAvailableDialog.Content" xml:space="preserve">
+    <value>Microsoft Store에서 새 버전을 사용할 수 있습니다.</value>
+  </data>
+  <data name="UpdateAvailableDialog.PrimaryButtonText" xml:space="preserve">
+    <value>Microsoft Store 열기</value>
+  </data>
+  <data name="UpdateLatestDialog.Content" xml:space="preserve">
+    <value>현재 최신 버전({0})을 사용 중입니다.</value>
+  </data>
+  <data name="UpdateCheckFailedDialog.Content" xml:space="preserve">
+    <value>업데이트를 자동으로 확인하지 못했습니다.{0}{0}{1}</value>
+  </data>
+  <data name="CreatorGitHubDialog.Title" xml:space="preserve">
+    <value>제작자 GitHub</value>
+  </data>
+  <data name="CreatorGitHubDialog.Content" xml:space="preserve">
+    <value>제작자 GitHub 페이지를 열지 못했습니다.</value>
+  </data>
+  <data name="StoreOpenDialog.Title" xml:space="preserve">
+    <value>Microsoft Store</value>
+  </data>
+  <data name="StoreOpenDialog.Content" xml:space="preserve">
+    <value>Microsoft Store 페이지를 열지 못했습니다.</value>
+  </data>
+  <data name="DialogCloseButtonText" xml:space="preserve">
+    <value>닫기</value>
   </data>
 </root>

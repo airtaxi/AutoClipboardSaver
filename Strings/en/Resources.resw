@@ -165,10 +165,67 @@
   <data name="OpenSettingsMenuFlyoutItem.Text" xml:space="preserve">
     <value>Open Settings Window</value>
   </data>
+  <data name="LanguageMenuBarItem.Title" xml:space="preserve">
+    <value>Language</value>
+  </data>
+  <data name="HelpMenuBarItem.Title" xml:space="preserve">
+    <value>Help</value>
+  </data>
+  <data name="EnglishLanguageRadioMenuFlyoutItem.Text" xml:space="preserve">
+    <value>English</value>
+  </data>
+  <data name="KoreanLanguageRadioMenuFlyoutItem.Text" xml:space="preserve">
+    <value>Korean</value>
+  </data>
+  <data name="JapaneseLanguageRadioMenuFlyoutItem.Text" xml:space="preserve">
+    <value>Japanese</value>
+  </data>
+  <data name="ChineseSimplifiedLanguageRadioMenuFlyoutItem.Text" xml:space="preserve">
+    <value>Chinese (Simplified)</value>
+  </data>
+  <data name="ChineseTraditionalLanguageRadioMenuFlyoutItem.Text" xml:space="preserve">
+    <value>Chinese (Traditional)</value>
+  </data>
+  <data name="CheckForUpdatesMenuFlyoutItem.Text" xml:space="preserve">
+    <value>Check for Updates</value>
+  </data>
+  <data name="CreatorGitHubMenuFlyoutItem.Text" xml:space="preserve">
+    <value>Creator GitHub</value>
+  </data>
   <data name="CloseMenuFlyoutItem.Text" xml:space="preserve">
     <value>Close</value>
   </data>
   <data name="TaskbarIcon.ToolTipText" xml:space="preserve">
     <value>Auto Clipboard Saver</value>
+  </data>
+  <data name="UpdateCheckDialog.Title" xml:space="preserve">
+    <value>Update Check</value>
+  </data>
+  <data name="UpdateAvailableDialog.Content" xml:space="preserve">
+    <value>A new version is available in Microsoft Store.</value>
+  </data>
+  <data name="UpdateAvailableDialog.PrimaryButtonText" xml:space="preserve">
+    <value>Open Microsoft Store</value>
+  </data>
+  <data name="UpdateLatestDialog.Content" xml:space="preserve">
+    <value>You're using the latest version ({0}).</value>
+  </data>
+  <data name="UpdateCheckFailedDialog.Content" xml:space="preserve">
+    <value>Unable to check for updates automatically.{0}{0}{1}</value>
+  </data>
+  <data name="CreatorGitHubDialog.Title" xml:space="preserve">
+    <value>Creator GitHub</value>
+  </data>
+  <data name="CreatorGitHubDialog.Content" xml:space="preserve">
+    <value>Unable to open the creator GitHub page.</value>
+  </data>
+  <data name="StoreOpenDialog.Title" xml:space="preserve">
+    <value>Microsoft Store</value>
+  </data>
+  <data name="StoreOpenDialog.Content" xml:space="preserve">
+    <value>Unable to open the Microsoft Store page.</value>
+  </data>
+  <data name="DialogCloseButtonText" xml:space="preserve">
+    <value>Close</value>
   </data>
 </root>

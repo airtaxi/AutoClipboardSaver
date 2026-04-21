@@ -21,6 +21,7 @@
     <Grid Loaded="OnRootElementLoaded">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <tb:TaskbarIcon
@@ -34,10 +35,13 @@
             </tb:TaskbarIcon.IconSource>
             <tb:TaskbarIcon.ContextFlyout>
                 <MenuFlyout AreOpenCloseAnimationsEnabled="True">
-                    <MenuFlyoutItem x:Uid="AuthorMenuFlyoutItem" IsEnabled="False" />
+                    <MenuFlyoutItem
+                        x:Name="AuthorMenuFlyoutItem"
+                        x:Uid="AuthorMenuFlyoutItem"
+                        IsEnabled="False" />
                     <MenuFlyoutItem x:Name="OpenSettingsMenuFlyoutItem" x:Uid="OpenSettingsMenuFlyoutItem" />
                     <MenuFlyoutSeparator />
-                    <MenuFlyoutItem x:Uid="CloseMenuFlyoutItem">
+                    <MenuFlyoutItem x:Name="CloseMenuFlyoutItem" x:Uid="CloseMenuFlyoutItem">
                         <MenuFlyoutItem.Command>
                             <XamlUICommand ExecuteRequested="OnCloseProgramMenuFlyoutItemClicked" />
                         </MenuFlyoutItem.Command>
@@ -65,6 +69,75 @@
             </TitleBar.IconSource>
         </TitleBar>
 
-        <Frame x:Name="AppFrame" Grid.Row="1" />
+        <MenuBar Grid.Row="1">
+            <MenuBarItem x:Name="LanguageMenuBarItem" AccessKey="L">
+                <RadioMenuFlyoutItem
+                    x:Name="EnglishLanguageRadioMenuFlyoutItem"
+                    AccessKey="E"
+                    Click="OnLanguageRadioMenuFlyoutItemClicked"
+                    GroupName="ApplicationLanguage"
+                    Tag="en" />
+                <RadioMenuFlyoutItem
+                    x:Name="KoreanLanguageRadioMenuFlyoutItem"
+                    AccessKey="K"
+                    Click="OnLanguageRadioMenuFlyoutItemClicked"
+                    GroupName="ApplicationLanguage"
+                    Tag="ko" />
+                <RadioMenuFlyoutItem
+                    x:Name="JapaneseLanguageRadioMenuFlyoutItem"
+                    AccessKey="J"
+                    Click="OnLanguageRadioMenuFlyoutItemClicked"
+                    GroupName="ApplicationLanguage"
+                    Tag="ja" />
+                <RadioMenuFlyoutItem
+                    x:Name="ChineseSimplifiedLanguageRadioMenuFlyoutItem"
+                    AccessKey="S"
+                    Click="OnLanguageRadioMenuFlyoutItemClicked"
+                    GroupName="ApplicationLanguage"
+                    Tag="zh-Hans" />
+                <RadioMenuFlyoutItem
+                    x:Name="ChineseTraditionalLanguageRadioMenuFlyoutItem"
+                    AccessKey="T"
+                    Click="OnLanguageRadioMenuFlyoutItemClicked"
+                    GroupName="ApplicationLanguage"
+                    Tag="zh-Hant" />
+            </MenuBarItem>
+            <MenuBarItem x:Name="HelpMenuBarItem" AccessKey="H">
+                <MenuFlyoutItem
+                    x:Name="CheckForUpdatesMenuFlyoutItem"
+                    AccessKey="U"
+                    Click="OnCheckForUpdatesMenuFlyoutItemClicked" />
+                <MenuFlyoutSeparator />
+                <MenuFlyoutItem
+                    x:Name="CreatorGitHubMenuFlyoutItem"
+                    AccessKey="G"
+                    Click="OnCreatorGitHubMenuFlyoutItemClicked" />
+            </MenuBarItem>
+        </MenuBar>
+
+        <Frame x:Name="AppFrame" Grid.Row="2" />
+
+        <Grid
+            x:Name="LoadingGrid"
+            Grid.RowSpan="3"
+            Visibility="Collapsed">
+            <Grid.Background>
+                <AcrylicBrush Opacity="0.5" TintColor="{ThemeResource LayerOnMicaBaseAltFillColorDefault}" />
+            </Grid.Background>
+
+            <StackPanel
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Spacing="8">
+                <ProgressRing
+                    Width="80"
+                    Height="80"
+                    IsIndeterminate="True" />
+                <TextBlock
+                    x:Name="LoadingTextBlock"
+                    HorizontalAlignment="Center"
+                    FontWeight="Bold" />
+            </StackPanel>
+        </Grid>
     </Grid>
 </winuiex:WindowEx>

@@ -55,7 +55,7 @@
             <ComboBoxItem Tag="20">20</ComboBoxItem>
             <ComboBoxItem Tag="25">25</ComboBoxItem>
             <ComboBoxItem Tag="30">30</ComboBoxItem>
-            <ComboBoxItem x:Uid="UnlimitedComboBoxItem" Tag="-1" />
+            <ComboBoxItem x:Name="UnlimitedComboBoxItem" x:Uid="UnlimitedComboBoxItem" Tag="-1" />
         </ComboBox>
 
         <ComboBox
@@ -71,7 +71,7 @@
             <ComboBoxItem Tag="360">6h</ComboBoxItem>
             <ComboBoxItem Tag="720">12h</ComboBoxItem>
             <ComboBoxItem Tag="1440">24h</ComboBoxItem>
-            <ComboBoxItem x:Uid="ExpirationDisabledComboBoxItem" Tag="-1" />
+            <ComboBoxItem x:Name="ExpirationDisabledComboBoxItem" x:Uid="ExpirationDisabledComboBoxItem" Tag="-1" />
         </ComboBox>
 
         <CheckBox

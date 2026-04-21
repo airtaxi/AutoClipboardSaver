@@ -23,7 +23,7 @@ You can click the tray icon to open the settings window and configure the app.
 - **System Startup** — Optionally launch on Windows startup
 - **System Tray** — Runs in the background with a tray icon; right-click to access settings and context menu
 - **Modern UI** — WinUI 3 interface with Mica backdrop
-- **Multi-Language Support** — English, Korean, Japanese, Chinese (Simplified)
+- **Multi-Language Support** — English, Korean, Japanese, Chinese (Simplified), Chinese (Traditional)
 
 ## How It Works
 
