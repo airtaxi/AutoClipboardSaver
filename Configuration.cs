@@ -10,7 +10,7 @@ namespace AutoClipboardSaver;
 public static class Configuration
 {
     private static readonly ApplicationDataContainer s_localSettings = ApplicationData.GetDefault().LocalSettings;
-    private static readonly string[] s_supportedLanguageTags = ["en", "ko", "ja", "zh-Hans", "zh-Hant"];
+    private static readonly string[] s_supportedLanguageTags = ["en-US", "ko-KR", "ja-JP", "zh-Hans", "zh-Hant"];
 
     public static string LanguageTag
     {
@@ -26,7 +26,7 @@ public static class Configuration
                     return supportedLanguageTag;
             }
 
-            return "en";
+            return "en-US";
         }
         set => s_localSettings.Values["LanguageTag"] = GetSupportedLanguageTag(value);
     }
@@ -119,7 +119,7 @@ public static class Configuration
         if (TryGetSupportedLanguageTag(languageTag, out string supportedLanguageTag))
             return supportedLanguageTag;
 
-        return "en";
+        return "en-US";
     }
 
     private static bool TryGetSupportedLanguageTag(string languageTag, out string supportedLanguageTag)

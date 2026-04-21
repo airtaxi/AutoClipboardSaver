@@ -264,9 +264,9 @@ public sealed partial class SettingsWindow : WindowEx
     {
         var selectedLanguageTag = Configuration.LanguageTag;
 
-        EnglishLanguageRadioMenuFlyoutItem.IsChecked = selectedLanguageTag == "en";
-        KoreanLanguageRadioMenuFlyoutItem.IsChecked = selectedLanguageTag == "ko";
-        JapaneseLanguageRadioMenuFlyoutItem.IsChecked = selectedLanguageTag == "ja";
+        EnglishLanguageRadioMenuFlyoutItem.IsChecked = selectedLanguageTag == "en-US";
+        KoreanLanguageRadioMenuFlyoutItem.IsChecked = selectedLanguageTag == "ko-KR";
+        JapaneseLanguageRadioMenuFlyoutItem.IsChecked = selectedLanguageTag == "ja-JP";
         ChineseSimplifiedLanguageRadioMenuFlyoutItem.IsChecked = selectedLanguageTag == "zh-Hans";
         ChineseTraditionalLanguageRadioMenuFlyoutItem.IsChecked = selectedLanguageTag == "zh-Hant";
     }

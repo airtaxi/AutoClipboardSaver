@@ -76,19 +76,19 @@
                     AccessKey="E"
                     Click="OnLanguageRadioMenuFlyoutItemClicked"
                     GroupName="ApplicationLanguage"
-                    Tag="en" />
+                    Tag="en-US" />
                 <RadioMenuFlyoutItem
                     x:Name="KoreanLanguageRadioMenuFlyoutItem"
                     AccessKey="K"
                     Click="OnLanguageRadioMenuFlyoutItemClicked"
                     GroupName="ApplicationLanguage"
-                    Tag="ko" />
+                    Tag="ko-KR" />
                 <RadioMenuFlyoutItem
                     x:Name="JapaneseLanguageRadioMenuFlyoutItem"
                     AccessKey="J"
                     Click="OnLanguageRadioMenuFlyoutItemClicked"
                     GroupName="ApplicationLanguage"
-                    Tag="ja" />
+                    Tag="ja-JP" />
                 <RadioMenuFlyoutItem
                     x:Name="ChineseSimplifiedLanguageRadioMenuFlyoutItem"
                     AccessKey="S"
