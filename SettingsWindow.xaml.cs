@@ -7,6 +7,7 @@ using Microsoft.UI.Xaml.Controls;
 using Microsoft.UI.Xaml.Input;
 using Microsoft.Windows.ApplicationModel.Resources;
 using System;
+using System.Runtime.InteropServices;
 using Windows.Foundation;
 using WinUIEx;
 
@@ -14,8 +15,24 @@ namespace AutoClipboardSaver;
 
 public sealed partial class SettingsWindow : WindowEx
 {
+    private const uint WindowMessageClose = 0x0010;
+    private const uint WindowMessageQueryEndSession = 0x0011;
+    private const uint WindowMessageEndSession = 0x0016;
+
+    private delegate nint WindowSubclassProcedure(nint windowHandle, uint message, nint windowParameter, nint longParameter, nuint subclassIdentifier, nuint referenceData);
+
+    [LibraryImport("comctl32.dll", SetLastError = true)]
+    [return: MarshalAs(UnmanagedType.Bool)]
+    private static partial bool SetWindowSubclass(nint windowHandle, WindowSubclassProcedure procedure, nuint subclassIdentifier, nuint referenceData);
+
+    [LibraryImport("comctl32.dll")]
+    private static partial nint DefSubclassProc(nint windowHandle, uint message, nint windowParameter, nint longParameter);
+
     private int _lastResizedHeight;
     private bool _isResizing;
+    private readonly WindowSubclassProcedure _windowSubclassProcedure;
+    private bool _forceClose;
+    private bool _systemShutdown;
 
     public SettingsWindow()
     {
@@ -35,6 +52,9 @@ public sealed partial class SettingsWindow : WindowEx
         // Since Activate() isn't called by default, we can set up the TaskbarIcon commands here
         TaskbarIcon.LeftClickCommand = OpenSettingsWindowCommand;
         OpenSettingsMenuFlyoutItem.Command = OpenSettingsWindowCommand;
+
+        _windowSubclassProcedure = WindowSubclassProc;
+        SetWindowSubclass(this.GetWindowHandle(), _windowSubclassProcedure, 1, 0);
 
         AppFrame.Navigate(typeof(MainPage));
     }
@@ -80,13 +100,34 @@ public sealed partial class SettingsWindow : WindowEx
         App.SetClipboardRecording(isOn);
     }
 
-    private void OnClosed(object sender, WindowEventArgs args)
+    private nint WindowSubclassProc(nint windowHandle, uint message, nint windowParameter, nint longParameter, nuint subclassIdentifier, nuint referenceData)
     {
-        args.Handled = true;
-        this.Hide();
+        switch (message)
+        {
+            case WindowMessageQueryEndSession:
+                _systemShutdown = true;
+                return 1;
+
+            case WindowMessageEndSession:
+                if (windowParameter != 0) App.Shutdown();
+                return 0;
+
+            case WindowMessageClose:
+                if (_forceClose || _systemShutdown)
+                    break;
+                this.Hide();
+                return 0;
+        }
+
+        return DefSubclassProc(windowHandle, message, windowParameter, longParameter);
     }
 
     [RelayCommand]
     private void OpenSettingsWindow() => App.ShowSettingsWindow();
-    private void OnCloseProgramMenuFlyoutItemClicked(XamlUICommand sender, ExecuteRequestedEventArgs args) => Environment.Exit(0);
+    private void OnCloseProgramMenuFlyoutItemClicked(XamlUICommand sender, ExecuteRequestedEventArgs args) => App.Shutdown();
+    public void ForceClose()
+    {
+        _forceClose = true;
+        Close();
+    }
 }

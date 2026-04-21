@@ -4,17 +4,17 @@ namespace AutoClipboardSaver;
 
 public partial class App : Application
 {
-    private static Window s_settingsWindow;
+    private static SettingsWindow s_settingsWindow;
     private static ClipboardMonitor s_clipboardMonitor;
 
-    public static Window SettingsWindow => s_settingsWindow;
+    public static SettingsWindow SettingsWindow => s_settingsWindow;
 
     public App()
     {
         InitializeComponent();
     }
 
-    protected override void OnLaunched(LaunchActivatedEventArgs args)
+    protected override void OnLaunched(LaunchActivatedEventArgs launchActivatedEventArgs)
     {
         s_clipboardMonitor = new ClipboardMonitor();
         s_clipboardMonitor.Start();
@@ -24,5 +24,18 @@ public partial class App : Application
 
     public static void SetClipboardRecording(bool isRecording) => s_clipboardMonitor.IsRecording = isRecording;
 
-    public static void ShowSettingsWindow() => s_settingsWindow.Activate();
+    public static void ShowSettingsWindow()
+    {
+        s_settingsWindow.DispatcherQueue.TryEnqueue(() =>
+        {
+            s_settingsWindow.Activate();
+            s_settingsWindow.BringToFront();
+        });
+    }
+
+    public static void Shutdown()
+    {
+        s_clipboardMonitor?.Dispose();
+        s_settingsWindow?.ForceClose();
+    }
 }

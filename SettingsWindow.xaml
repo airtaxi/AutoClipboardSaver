@@ -9,7 +9,6 @@
     xmlns:tb="using:H.NotifyIcon"
     xmlns:winuiex="using:WinUIEx"
     MinHeight="0"
-    Closed="OnClosed"
     IsMaximizable="False"
     IsMinimizable="False"
     IsResizable="False"
