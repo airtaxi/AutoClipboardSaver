@@ -65,17 +65,26 @@ public sealed partial class MainPage : Page
 
     public void RefreshLocalizedContent()
     {
+        var wasInitializing = _isInitializing;
+        _isInitializing = true;
         var resourceLoader = new ResourceLoader();
 
-        SaveDirectoryPathTextBox.Header = resourceLoader.GetString("SaveDirectoryPathTextBox/Header");
-        SaveWithTimestampToggleSwitch.OnContent = resourceLoader.GetString("SaveWithTimestampToggleSwitch/OnContent");
-        SaveWithTimestampToggleSwitch.OffContent = resourceLoader.GetString("SaveWithTimestampToggleSwitch/OffContent");
-        FileFormatComboBox.Header = resourceLoader.GetString("FileFormatComboBox/Header");
-        MaxImagesComboBox.Header = resourceLoader.GetString("MaxImagesComboBox/Header");
-        UnlimitedComboBoxItem.Content = resourceLoader.GetString("UnlimitedComboBoxItem/Content");
-        ExpirationComboBox.Header = resourceLoader.GetString("ExpirationComboBox/Header");
-        ExpirationDisabledComboBoxItem.Content = resourceLoader.GetString("ExpirationDisabledComboBoxItem/Content");
-        LaunchOnStartupCheckBox.Content = resourceLoader.GetString("LaunchOnStartupCheckBox/Content");
+        try
+        {
+            SaveDirectoryPathTextBox.Header = resourceLoader.GetString("SaveDirectoryPathTextBox/Header");
+            SaveWithTimestampToggleSwitch.OnContent = resourceLoader.GetString("SaveWithTimestampToggleSwitch/OnContent");
+            SaveWithTimestampToggleSwitch.OffContent = resourceLoader.GetString("SaveWithTimestampToggleSwitch/OffContent");
+            FileFormatComboBox.Header = resourceLoader.GetString("FileFormatComboBox/Header");
+            MaxImagesComboBox.Header = resourceLoader.GetString("MaxImagesComboBox/Header");
+            UnlimitedComboBoxItem.Content = resourceLoader.GetString("UnlimitedComboBoxItem/Content");
+            ExpirationComboBox.Header = resourceLoader.GetString("ExpirationComboBox/Header");
+            ExpirationDisabledComboBoxItem.Content = resourceLoader.GetString("ExpirationDisabledComboBoxItem/Content");
+            LaunchOnStartupCheckBox.Content = resourceLoader.GetString("LaunchOnStartupCheckBox/Content");
+
+            RefreshSelectedComboBoxItemContent(MaxImagesComboBox);
+            RefreshSelectedComboBoxItemContent(ExpirationComboBox);
+        }
+        finally { _isInitializing = wasInitializing; }
     }
 
     private async void OnBrowseFolderButtonClicked(object sender, RoutedEventArgs e)
@@ -123,4 +132,13 @@ public sealed partial class MainPage : Page
 
     private void OnLaunchOnStartupCheckBoxClicked(object sender, RoutedEventArgs e) =>
         Configuration.LaunchOnStartup = LaunchOnStartupCheckBox.IsChecked ?? false;
+
+    private static void RefreshSelectedComboBoxItemContent(ComboBox comboBox)
+    {
+        var selectedIndex = comboBox.SelectedIndex;
+        if (selectedIndex < 0) return;
+
+        comboBox.SelectedIndex = -1;
+        comboBox.SelectedIndex = selectedIndex;
+    }
 }
