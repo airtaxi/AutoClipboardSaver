@@ -20,6 +20,7 @@
 		<AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
 		<GenerateTestArtifacts>True</GenerateTestArtifacts>
 		<AppxBundle>Always</AppxBundle>
+		<AppxBundleAutoResourcePackageQualifiers>Scale</AppxBundleAutoResourcePackageQualifiers>
 		<AppxBundlePlatforms>x86|x64|arm64</AppxBundlePlatforms>
 		<HoursBetweenUpdateChecks>0</HoursBetweenUpdateChecks>
 	</PropertyGroup>
